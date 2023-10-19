@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: sw2-laravel
+    restart: always
+    working_dir: /var/www/html/
+    container_name: sw2-laravel
+    depends_on:
+      - db
+    hostname: sw2-laravel
+    ports:
+      - 6000:8000
+      - 5173:5173
+    volumes:
+      - ./:/var/www/html/:rw
+    networks:
+      - sw2-network
+
+networks:
+  sw2-network:
+    external: true
